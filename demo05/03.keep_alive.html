@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <input type="radio" v-model="radio" value="home">home
+        <input type="radio" v-model="radio" value="list">list
+        <!-- used for cache component -->
+        <keep-alive>
+            <component :is="radio"></component>
+        </keep-alive>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        let home = {
+            template: '<div>Home</div>',
+            mounted() {
+                alert('mounted');
+            },
+            beforeDestroy() {
+                alert('destroy');
+            }
+        };
+        let list = {
+            template: '<div>List</div>',
+            mounted() {
+                alert('mounted');
+            },
+            beforeDestroy() {
+                alert('destroy');
+            }
+        };
+        let vm = new Vue({
+            el: '#app',
+            components: {
+                home,
+                list
+            },
+            data: {
+                radio: 'home',
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

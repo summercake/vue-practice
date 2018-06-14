@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <template v-if="flag">
+            <div>Nice</div>
+            <div>Nice</div>
+            <div>Nice</div>
+            <div>Nice</div>
+        </template>
+        <div v-else>very nice</div>
+        <br>
+        <button @click="cut=!cut">Click me</button>
+        <template v-if="cut">
+            <label>Sign up</label>
+            <input type="text" key="1">
+        </template>
+        <template v-else>
+            <label>Sign in</label>
+            <input type="text" key="2">
+        </template>
+    </div>
+
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false,
+                cut: true
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+[
+    {
+        "isSelected": true,
+        "productCover": "./demo.jpg",
+        "productName": "Beauties Node.js",
+        "productInfo": "Color:Node.js",
+        "productPrice": 57.8,
+        "productCount": 3
+    },
+    {
+        "isSelected": true,
+        "productCover": "./demo.jpg",
+        "productName": "Beauties Node.js",
+        "productInfo": "Color:Node.js",
+        "productPrice": 57.8,
+        "productCount": 3
+    }
+]

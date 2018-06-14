@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <input type="text" v-model="val"> {{fullName}}
+        <br>{{msg}}
+    </div>
+
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                firstName: 'jack',
+                lastName: 'Ma',
+                val: '',
+                msg:''
+            },
+            computed: {
+                fullName() {
+                    return this.firstName + this.val + this.lastName;
+                }
+            }
+        });
+        vm.$watch('val', (newVal, oldVal) => {
+            vm.msg = '......';
+            setTimeout(() => {
+                if (newVal.length < 3) {
+                    return vm.msg = 'too small';
+                }
+                if (newVal.length > 6) {
+                    return vm.msg = 'too big';
+                }
+                vm.msg = ''
+            }, 2000);
+        })
+    </script>
+</body>
+
+</html>

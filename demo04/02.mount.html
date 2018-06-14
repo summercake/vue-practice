@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <p ref="myptag">{{msg}}</p>
+        <div ref="wrap">
+            <div v-for="a in arr" ref="mydiv">{{a}}</div>
+        </div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        // this.$data --------------------> the data on instance
+        // this.$watch -------------------> watch on instance
+        // this.$el ----------------------> current el element
+        // this.$set ---------------------> Adds a property to a reactive object, ensuring the new property is also reactive, so triggers view updates.
+        // this.$options -----------------> all properties of instance
+        // this.$nextTick ----------------> 
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                a:'123',
+                msg: 'hello vue',
+                arr:[1,2,3]
+            },
+            mounted() {
+                this.$nextTick(() => {
+                    console.log(vm);
+                });
+                console.log(this.$refs.myptag);
+                console.log(this.$refs.mydiv);
+                this.arr = [1,2,3,4];
+                console.log(this.$refs.wrap);
+            }
+        });
+    </script>
+</body>
+
+</html>

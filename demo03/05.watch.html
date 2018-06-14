@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <input type="text" v-model="a"> {{msg}}
+    </div>
+
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                a: '',
+                msg: ''
+            },
+            watch: {
+                a(newVal, oldVal) {
+                    setTimeout(() => {
+                        if (newVal.length < 3) {
+                            return this.msg = 'too small';
+                        }
+                        if (newVal.length > 6) {
+                            return this.msg = 'too big';
+                        }
+                        this.msg = ''
+                    }, 2000)
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

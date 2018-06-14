@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p v-on:click="fn1">Click me 1</p>
+        <hr>
+        <p @click="fn2">Click me 2 </p>
+        <hr>
+        <p @click="fn3">Click me 3</p>
+        <hr>
+        <p @click="fn4($event,2)">Click me 4</p>
+    </div>
+    <script src="/home/jack/Projects/Vue.js/demo/node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            methods:{
+                fn1(){alert("fn1 and a is " + this.a)},
+                fn2:function(){alert("fn2 and a is " + this.a)},
+                fn4:function(event, b){alert("fn2 and b is " + b)}
+            },
+            data: {
+                fn3(){alert("fn3 and a is " + this.a)}, // the value of this.a is undefined here
+                a:1
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <router-link to="/home">Home</router-link>
+        <router-link to="/detail">Link</router-link>
+        <router-view></router-view>
+    </div>
+    <template id="detail">
+        <div>
+            <router-link to="/detail/profile">profile</router-link>
+            <router-link to="/detail/about">about</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        let home = {
+            template: '<div>Home Page</div>'
+        }
+        let detail = {
+            template: '#detail'
+        }
+        let profile = {
+            template: '<div>Profile Page</div>'
+        }
+        let about = {
+            template: '<div>About Page</div>'
+        }
+        let routes = [{
+                path: '/home',
+                component: home
+            },
+            {
+                path: '/detail',
+                component: detail,
+                children: [{ 
+                        path: 'profile', // never use '/' in children path
+                        component: profile
+                    },
+                    {
+                        path: 'about',
+                        component: about
+                    },
+                ]
+            },
+        ]
+        let router = new VueRouter({
+            routes
+        })
+        let vm = new Vue({
+            el: '#app',
+            router,
+            components: {
+                home,
+                detail,
+                profile,
+                about
+            },
+        });
+    </script>
+</body>
+
+</html>

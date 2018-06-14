@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        Parent:{{money}}
+        <child :m="money" @child-msg="things"></child>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            components: {
+                child: {
+                    props: ['m'],
+                    template: '<div>Son {{m}} <br> <button @click="getMoney()">more money</button></div>',
+                    methods: {
+                        getMoney(val) {
+                            this.$emit('child-msg', 800);
+                        }
+                    }
+                },
+            },
+            data: {
+                money: 400
+            },
+            methods: {
+                things(val) {
+                    this.money = val;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

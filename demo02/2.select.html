@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+       <select v-model="a" multiple>
+           <option value="" disabled>Options</option>
+           <option value="1" >Hello</option>
+           <option value="2" >Hi</option>
+           <option value="3" >How a u</option>
+       </select><br>{{a}}
+       <hr>
+       <br>{{gender}}
+       <input type="radio" v-model="gender" value="Male">Male
+       <input type="radio" v-model="gender" value="Female">Female
+    </div>
+
+    <script src="/home/jack/Projects/Vue.js/demo02/node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                a: [],
+                gender:''
+            }
+        })
+    </script>
+</body>
+
+</html>

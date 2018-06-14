@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <!-- ref is used for calling component instance -->
+        <loading ref="load"></loading>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        // parent component call child component
+        let loading = {
+            data() {
+                return {
+                    flag: true,
+                    a: 1
+                }
+            },
+            template: '<div v-show="flag">Loading...</div>',
+            methods: {
+                hide() {
+                    this.flag = false;
+                }
+            }
+        }
+        let vm = new Vue({
+            el: '#app',
+            created(){
+                // console.log(this.$refs.load);
+            },
+            mounted() {
+                // console.log(this.$refs.load);
+                // this.$refs.load.hide();
+                // this.$refs.load.$el.style.backgroud = 'red';
+            },
+            components: {
+                loading
+            },
+            data: {
+
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="fruit of fruits">
+                {{fruit.name}}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="fruit in fruits">
+                {{fruit.name}}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="(fruit,index) in fruits">
+                {{index+1 +" "+fruit.name}}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="(fruit, index) in fruits">{{fruit.name}}
+                <ul>
+                    <li v-for="(color, childIndex) in fruit.color">
+                        <!-- {{ (index + 1) + "." + (childIndex + 1) +" "+ color}} -->
+                        {{index+1}}.{{childIndex+1}}{{" " + color}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="c in 'abc'">
+                {{ c }}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="n in 5">
+                {{ n }}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="(value, key, index) in obj">
+                {{key}}{{" : "+value}}{{" : "+index}}
+            </li>
+        </ul>
+    </div>
+    <script src="/home/jack/Projects/Vue.js/demo/node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                fruits: [
+                    { name: 'banana', color: ['green', 'yellow'] },
+                    { name: 'apple', color: ['red', 'green', 'yellow'] },
+                    { name: 'pear', color: ['pink'] }
+                ],
+                obj: {
+                    name: 'jack',
+                    age: 18,
+                    address: '1234 Hero Road'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div>parent
+            <div>child
+                <div>grandson</div>
+            </div>
+        </div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        let parent = {
+            template: '<div>Parent</div>'
+        };
+        let child = {
+            template: '<div>Child</div>'
+        };
+        let grandsson = {
+            template: '<div>grandson</div>'
+        };
+        let vm = new Vue({
+            el: '#app',
+            components: {
+                parent,
+                child,
+                grandsson,
+            },
+            data: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+
+        div>div {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+
+        .v-enter {
+            opacity: 0;
+        }
+
+        .v-enter-active {
+            transition: 1s linear;
+        }
+
+        .v-leave-active {
+            opacity: 0;
+            transition: 1s linear;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- after vue compiling, v-cloak div will display, thus, this div will not flash -->
+    <div id="app" v-cloak>
+        <!-- v-if operate dom; v-show operate css -->
+        <!-- if it operate more frequently, v-show should be used -->
+        <!-- <div v-if="flag">I love you</div> -->
+        <button @click="flag=!flag">flag</button>
+        <transition>
+            <div v-show="flag">I love you</div>
+        </transition>
+        <transition name="t2">
+            <div v-show="flag">I love you</div>
+        </transition>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                flag: true
+            }
+        })
+    </script>
+</body>
+
+</html>

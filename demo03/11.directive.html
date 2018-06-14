@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+
+        .a {
+            width: 100px;
+            height: 100px;
+            background: gray;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <button v-color="flag">change Color</button>
+        <hr>
+        <div v-drag class="a"></div>
+        <div v-drag class="a"></div>
+    </div>
+
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        let vm = new Vue({
+            directives: {
+                drag(el) {
+                    el.onmousedown = function (e) {
+                        var disx = e.pageX - el.offsetLeft;
+                        var disy = e.pageY - el.offsetTop;
+                        document.onmousemove = function (e) {
+                            el.style.left = e.pageX - disx + 'px';
+                            el.style.top = e.pageY - disy + 'px';
+                        };
+                        document.onmouseup = function () {
+                            document.onmousemove = document.onmouseup = null;
+                        };
+                        e.preventDefault();
+                    }
+                },
+                color(el, bindings) {
+                    el.style.background = bindings.value;
+                }
+            },
+            el: '#app',
+            data: {
+                flag: 'red',
+            }
+        });
+    </script>
+</body>
+
+</html>

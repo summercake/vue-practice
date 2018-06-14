@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/home/jack/Projects/Vue.js/demo/node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ a.school }}
+    </div>
+    <script>
+        let app = new Vue({
+            el:'#app',
+            data:{
+                // a:{school:1}
+                a:{}
+            }
+        })
+        app.$set(app.a, 'school',1);
+        app.a = {school:2, age:8, address:'abc'}
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <panel :type="article.type" @show-title="parent" v-for="(article, index) in articles" :key="index">
+            <div slot="header"><span v-html="article.title"></span></div>
+            <div slot="content">
+                {{article.content}}
+            </div>
+            <div v-if="article.author">{{article.author}}</div>
+        </panel>
+    </div>
+    <template id="panel">
+        <div class="panel" :class="[color]">
+            <div class="panel-heading" ref="head">
+                <slot name="header"></slot>
+            </div>
+            <div class="panel-body">
+                <slot name="content"></slot>
+            </div>
+            <div class="panel-footer">
+                <slot>Anonymous</slot>
+                <button @click="show">Show Title</button>
+            </div>
+        </div>
+    </template>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        let panel = {
+            template: '#panel',
+            computed: {
+                color() {
+                    return 'panel-' + this.type;
+                }
+            },
+            props: {
+                type: {
+                    type: [String],
+                    defalt: 'default'
+                }
+            },
+            methods:{
+                show(){
+                    this.$emit('show-title',this.$refs.head.innerText);
+                }
+            }
+        };
+        let vm = new Vue({
+            el: '#app',
+            components: {
+                panel
+            },
+            data: {
+                articles:[
+                    {type:'warning',title:'<h2>vue1</h2>',content:'This is content', author:'jack'},
+                    {type:'danger',title:'<h2>vue2</h2>',content:'This is content', author:'jack'},
+                    {type:'primary',title:'<h2>vue3</h2>',content:'This is content', author:'jack'},
+                    {type:'success',title:'<h2>vue4</h2>',content:'This is content', author:'jack'},
+                ]
+            },
+            methods: {
+                parent(title){
+                    alert(title);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

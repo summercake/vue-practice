@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+
+        .mask {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            background: #333;
+            top: 0;
+            left: 0;
+        }
+
+        .dialog {
+            width: 400px;
+            height: 150px;
+            background: #fff;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <button @click="showOrNot = true">Modal</button>
+        <modal :show.sync="showOrNot" v-show="showOrNot"></modal>
+    </div>
+    <template id="dialog">
+        <div class="mask">
+            <div class="dialog">
+                <button @click="disappear()">Close</button>
+            </div>
+        </div>
+    </template>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        let modal = {
+            props: ['show'],
+            template: '#dialog',
+            methods: {
+                disappear(val) {
+                    this.$emit('update:show', false);
+                }
+            }
+        };
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                showOrNot: false,
+            },
+            components: {
+                modal
+            }
+        });
+    </script>
+</body>
+
+</html>

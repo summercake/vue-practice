@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <router-link :to="{path:'/home'}">Home</router-link>
+        <router-link :to="{path:'/list'}">List</router-link>
+        <router-view></router-view>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        let home = {
+            template: '<div>Home Page <button @click="toList">Go List</button></div>',
+            methods: {
+                toList() {
+                    // force transfer page
+                    // this.$router.push('/list'); 
+
+                    // force replace page link in history, not create new in history
+                    this.$router.replace('/list'); 
+                }
+            }
+        }
+        let list = {
+            template: '<div>List Page <button @click="toHome">Go Home</button></div>',
+            methods: {
+                toHome() {
+                    // this.$router.push('/home')
+                    this.$router.go(-1); // return some previous page
+                }
+            }
+        }
+        let routes = [{
+                path: '', // default router
+                component: home
+            },{
+                path: '/home',
+                component: home
+            },
+            {
+                path: '/list',
+                component: list
+            },
+            // {
+            //     path: '*', // only change component
+            //     component: home
+            // },
+            {
+                path: '/*',
+                redirect: '/home', // change path and component
+            }
+        ]
+        let router = new VueRouter({
+            // mode: 'history',
+            routes,
+            // linkActiveClass: 'active',
+        })
+        let vm = new Vue({
+            el: '#app',
+            router,
+            components: {
+                home,
+                list
+            },
+        });
+    </script>
+</body>
+
+</html>

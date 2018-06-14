@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./node_modules/animate.css/animate.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+
+        div>div {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- after vue compiling, v-cloak div will display, thus, this div will not flash -->
+    <div id="app" v-cloak>
+        <!-- v-if operate dom; v-show operate css -->
+        <!-- if it operate more frequently, v-show should be used -->
+        <!-- <div v-if="flag">I love you</div> -->
+        <button @click="flag=!flag">flag</button>
+        <transition enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
+            <div v-show="flag">I love you</div>
+        </transition>
+    </div>
+    <br>
+    <div id="app2" v-cloak>
+        <!-- v-if operate dom; v-show operate css -->
+        <!-- if it operate more frequently, v-show should be used -->
+        <!-- <div v-if="flag">I love you</div> -->
+        <button @click="flag=!flag">flag</button>
+        <input type="text" v-model="query">
+        <transition-group enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
+            <div v-for="(a, index) in newArr" :key="Math.random()">{{a}}</div>
+        </transition-group>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                flag: true,
+                arr: [1, 2, 3, 4, 5]
+            }
+        })
+
+        let vm2 = new Vue({
+            el: '#app2',
+            computed: {
+                newArr() {
+                    return this.arr.filter(item => item == this.query);
+                }
+            },
+            data: {
+                flag: true,
+                arr: [1, 2, 3, 4, 5],
+                query: ''
+            }
+        })
+    </script>
+</body>
+
+</html>

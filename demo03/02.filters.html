@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app1" v-cloak>
+        {{'hello' | my }}
+    </div>
+
+    <div id="app2">
+        {{ 'hello' | my}}
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        // global filter, it must be in the top
+        Vue.filter('my', (data) => {
+            return 'jack ' + data
+        });
+        new Vue({
+            el: '#app1',
+            data: {
+
+            }
+        });
+        new Vue({
+            el: '#app2',
+            data: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

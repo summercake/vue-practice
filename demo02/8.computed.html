@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <!-- after vue compiling, v-cloak div will display, thus, this div will not flash -->
+    <div id="app" v-cloak>
+        <div class="container">
+            <div class="row">
+                <table class="table table-hover">
+                    <caption class="h2 text-center">Shopping Cart</caption>
+                    <tr>
+                        <th>Select All
+                            <input type="checkbox" v-model="selectAll">
+                        </th>
+                        <td>Product</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Total</td>
+                        <td>Operate</td>
+                    </tr>
+                    <tr v-for="(product, index) in products">
+                        <td>
+                            <input type="checkbox" v-model="product.isSelected">
+                        </td>
+                        <td>
+                            <img :src="product.productCover" :alt="product.productName" width="50">{{product.productInfo}}
+                        </td>
+                        <td>
+                            {{product.productPrice}}
+                        </td>
+                        <td>
+                            <input type="number" v-model.number.lazy="product.productCount" min="1">
+                        </td>
+                        <td>
+                            {{product.productCount*product.productPrice | toFix(2)}}
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" @click="remove(product)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            Sum : {{sum | toFix(2)}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            computed: {
+                selectAll: {
+                    get() {
+                        return this.products.every(p => p.isSelected);
+                    },
+                    set(val) { 
+                        this.products.forEach(p => p.isSelected = val);
+                    }
+                },
+                // if computed property writed as method, it will call get() method
+                sum() { 
+                    return this.products.reduce((prev, next) => {
+                        if (!next.isSelected) return prev;
+                        return prev + next.productPrice * next.productCount;
+                    }, 0)
+                },
+                // this is a classic computed property
+                /* sum: {
+                    get() {
+                        return this.products.reduce((prev, next) => {
+                            if (!next.isSelected) return prev;
+                            return prev + next.productPrice * next.productCount;
+                        }, 0)
+                    }
+                } */
+            },
+            filters: {
+                toFix(input, param) {
+                    return '$' + input.toFixed(param);
+                }
+            },
+            // created method is a hook of vue, using for ajax
+            created() {
+                this.getData();
+            },
+            methods: {
+                getData() {
+                    axios.get('./cart.json').then(res => {
+                        this.products = res.data;
+                        this.checkOne();
+                    }, err => {
+                        console.log(err);
+                    })
+                },
+                remove(p) {
+                    this.products = this.products.filter(item => item !== p);
+                },
+                // change() {
+                //     this.products.forEach(item => item.isSelected = this.selectAll);
+                // },
+                // checkOne() {
+                //     this.selectAll = this.products.every(item => item.isSelected);
+                // },
+                // sum() {
+                //     return this.products.reduce((prev, next) => {
+                //         if (!next.isSelected) return prev;
+                //         return prev + next.productPrice * next.productCount;
+                //     }, 0);
+                // }
+            },
+            data: {
+                products: [],
+                // selectAll: false,
+            }
+        })
+    </script>
+</body>
+
+</html>

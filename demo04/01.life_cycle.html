@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+       
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        /* 
+            Lift Cycle -----------------------> use hook function
+            1. beforeCreated()
+            2. create() ----------------------> initialize and complete ajax
+            3. beforeMount() -----------------> compile template and outerHTML and render dom 
+            4. mounted() -----------------------> after dom rendered, dom can be operated
+            5. beforeUpdate() ----------------> watch data change, and prepare update from virtual dom
+            6. update() ----------------------> update data change to real dom
+            7. beforeDestroy() ---------------> prepare to remove vue watcher, components, and event listeners
+            8. destroy() ---------------------> remove vue watcher and components, and event listeners
+        */
+        let vm = new Vue({
+            el: '#app',
+            beforeCreated(){
+
+            },
+            created(){
+                
+            },
+            beforeMount(){
+                
+            },
+            mounted(){
+
+            },
+            // should be replaced by watch
+            beforeUpdate(){
+
+            },
+            // should be replaced by watch
+            updated(){
+
+            },
+            beforeDestroy(){
+
+            },
+            destroy(){
+
+            },
+            data: {
+                a:1
+            },
+            template:'<div>{{a}}</div>', // only can contain one root element
+            
+
+        });
+    </script>
+</body>
+
+</html>

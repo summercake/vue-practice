@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="checkbox" v-model="a">{{a}}
+        <hr> hobby: {{b}} 
+        <!-- if multiple checkbox, value tag is neccessary -->
+        <br>
+        <input type="checkbox" v-model="b" value="swimming">swimming
+        <br> 
+        <input type="checkbox" v-model="b" value="reading">reading
+        <br> 
+        <input type="checkbox" v-model="b" value="coding">coding
+        <br> 
+        <input type="checkbox" v-model="b" value="traveling">traveling
+        <br> 
+        <input type="checkbox" v-model="b" value="sleeping">sleeping
+        <br>
+        <hr>
+    </div>
+
+    <script src="/home/jack/Projects/Vue.js/demo02/node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                a: true,
+                b: []
+            }
+        })
+    </script>
+</body>
+
+</html>

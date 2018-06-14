@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./node_modules/animate.css/animate.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <router-link to="/home">Home</router-link>
+        <router-link to="/list">List</router-link>
+        <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
+            <keep-alive>
+                <router-view style="position: absolute; top:0;left:0;width:100%;"></router-view>
+            </keep-alive>
+        </transition>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        let home = {
+            template: '<div style="background:red;">Home Page</div>'
+        }
+        let list = {
+            template: '<div style="background:green;">List Page</div>'
+        }
+        let routes = [{
+                path: '/home',
+                component: home
+            },
+            {
+                path: '/list',
+                component: list
+            },
+        ]
+        let router = new VueRouter({
+            routes,
+        })
+        let vm = new Vue({
+            el: '#app',
+            router,
+        });
+    </script>
+</body>
+
+</html>

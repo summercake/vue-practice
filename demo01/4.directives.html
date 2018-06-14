@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/home/jack/Projects/Vue.js/demo/node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>v-model</h1>
+        <input type="text" v-model="msg">
+        <hr>
+        <h1>v-text</h1>
+        <div v-text="msg"></div>
+        <hr>
+        <h1>v-once</h1>
+        <div v-once="msg">
+            {{msg}}
+            {{msg}}
+        </div>
+        <hr>
+        <h1>v-html</h1>
+        <div>{{ p }}</div>
+        <div v-html="p"></div>
+        <hr>
+    </div>
+    <script>  
+        let app = new Vue({
+            el:'#app',
+            data:{
+                msg:'hello vue!!!',
+                p:'<p>hello</p>'
+            }
+        })
+    </script>
+</body>
+</html>

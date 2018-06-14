@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/home/jack/Projects/Vue.js/demo/node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" id="input">
+    </div>
+    <script>  
+        let obj = {};
+        let temp = {};
+        Object.defineProperty(obj,'name',{
+            // configurable:false,
+            // writable:false,
+            // enumerable:false,
+            // value:1
+            get(){
+                return temp["name"]
+            },
+            set(val){ 
+                temp["name"] = val;
+                input.value = obj.name;
+            }
+        })
+        input.value = obj.name;
+        input.addEventListener('input', function(){
+            obj.name = this.value;
+        })
+        // delete obj.name;
+        // obj.name = 1000;
+        // for (let key in obj){
+        //     console.log(key);
+        // }
+    </script>
+</body>
+</html>

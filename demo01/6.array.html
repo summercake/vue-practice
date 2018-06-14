@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/home/jack/Projects/Vue.js/demo/node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ arr }}
+    </div>
+    <script>
+        let app = new Vue({
+            el:'#app',
+            data:{
+                arr:[1,2,3,4,5]
+            }
+        });
+        // app.arr[0] = 100; // vue can not listen arr in data
+        // pop push shift unshift sort reserve splice filter map
+        app.arr = app.arr.map(item=>item*3);
+
+    </script>
+</body>
+</html>

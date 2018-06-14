@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/home/jack/Projects/Vue.js/demo/node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ msg==='Hello Vue!!!'?1:'Hello Vue!!!' }}
+        <br><hr>
+        {{ msg=2 }}
+    </div>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'Hello Vue!!!'
+            }
+        }) 
+    </script>
+</body>
+</html>

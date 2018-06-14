@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <!-- @event.stop : stop event expension -->
+        <!-- @event.capture : capture event -->
+        <!-- @event.once : execute only one time -->
+        <!-- @event.prevent : prevent default action -->
+        <!-- @event.self : execute when source of event is self -->
+        <div @click="parent">parent
+            <div @click.self="child">child
+                <div @click="grandson">grandson</div>
+            </div>
+        </div>
+        <a href="http://www.google.com" @click.prevent="parent">Google</a>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- axios is based on promise -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            methods: {
+                parent() {
+                    alert('parent');
+                },
+                child() {
+                    alert('child');
+                },
+                grandson(e) {
+                    alert('grandson');
+                    // e.cancelBubble=true;
+                    // e.stopPropagation();
+                },
+            },
+            data: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>
